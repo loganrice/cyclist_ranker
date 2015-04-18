@@ -2,8 +2,8 @@ require 'mechanize'
 require 'pry'
 
 BASE_URL = "https://egghead.io"
-EMAIL = "EMAIL"
-PASSWORD = "PASSWORD"
+EMAIL = "loganrice72@gmail.com"
+PASSWORD = "meetup"
 
 agent = Mechanize.new
 agent.user_agent_alias = 'iPhone'
@@ -66,7 +66,7 @@ agent.get(BASE_URL + "/users/sign_in") do |page|
         download_page = agent.get(BASE_URL + url)
         say "downloading file at: " + download_page.title
         link = download_page.link_with(id: /clicker1/)
-        agent.get(link.href).save_as "#{file_name}.mp4"
+        agent.get(link.href).save_as file_name + ".mp4" 
       else
         next
       end

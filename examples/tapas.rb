@@ -1,10 +1,9 @@
 require 'rubygems'
 require 'mechanize'
-require 'pry'
 
-DOWNLOAD_BATCH_SIZE = 1
-EMAIL = 'email@example.com'
-PASSWORD = 'PASSWORD'
+DOWNLOAD_BATCH_SIZE = 10
+EMAIL = ''
+PASSWORD = ''
 
 def say(msg, important = false)
   puts "" if important
@@ -17,31 +16,21 @@ def exit_with(msg)
   exit
 end
 
+a = Mechanize.new
 
 say "Logging in..."
 
-def login
-  a = Mechanize.new
-
-  content_page = a.get('https://rubytapas.dpdcart.com/subscriber/content') do |page|
-    page.form_with(id: 'login-form') do |f|
-      f.username = EMAIL
-      f.password = PASSWORD
-    end
-    
-  end
-
-  content_page.click_button
+a.get('https://rubytapas.dpdcart.com/subscriber/content') do |page|
+  content_page = page.form_with(id: 'login-form') do |f|
+    f.username = EMAIL
+    f.password = PASSWORD
+  end.click_button
 
   say "Got page: " + content_page.uri.to_s
+
   exit_with("Couldn't log in") if content_page.title =~ /Login/
-end
 
-login 
-
-count = 0
-while count < 1
-  binding.pry
+  count = 0
   a.page.parser.css('div.blog-entry').each do |entry|
     entry_title = entry.css('h3').first.content rescue nil
 

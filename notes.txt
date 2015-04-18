@@ -1,0 +1,28 @@
+
+
+Why Screen Scrape?
+- Archive comments from an interesting commentator and use it for blog post
+  -yareallyarchive.com
+- Pull realestate availability (i.e. commercial leases)
+- Aggretating data into a single source 
+- Pricenomics provides websites with their data (est. $2k per site per month)
+- Initially populating a database
+
+Basic structure
+- convert html into a tree like object
+- provide methods for naviating the structure
+  - access elements
+  - access values
+  - access attributes
+
+We will be using Mechanize
+- The Mechanize library is used for automating interaction with websites. 
+  -stores and sends cookies
+  -follows redirects
+  -Form fields can be populated and submitted. 
+  -stores site history
+- Mechanize is a wrapper around Nokogiri
+-Nokogiri is actually a wrapper around Daniel Veillard's HTML/XML parsing library libxml2
+- Nokogiri is widely known and used for it's ability to parse HTML/XML data using xpath and css.
+  - it is used by lots of applications
+  - For example, Rails has a gem called Capybara that helps you test web applications by simulating how a real user would interact with your app. 
